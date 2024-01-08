@@ -1,64 +1,54 @@
-
-#include <iostream>
-
+#include<iostream>
 using namespace std;
-int n;
+
 template<class T>
-#define size 20
-void sort(T a[size])
+class Stack
 {
-    int i,j;
-    T temp;
-    for(i=0; i<n; i++)
-    {
-        for(j=i+1;j<n;j++)
+private:
+        T *stk;
+        int top;
+        int size;
+public:
+       Stack(int sz)
+       {
+        size=sz;
+        top=-1;
+        stk=new T[size];
+       } 
+       void push(T x);
+       T pop();
+};
+
+template<class T>
+void Stack<T>::push(T x)
+{
+    if(top==size-1)
+       cout<<"Stack is Full ";
+    else
         {
-            if(a[i]>a[j])
-            {
-                temp=a[i];
-                a[i]=a[j];
-                a[j]=temp;
-            }
+            top++;
+            stk[top]=x;
         }
+}
+
+template<class T>
+T Stack<T>::pop()
+{
+    T x=0;
+    if(top==-1)
+       cout<<"Stack is Empty "<<endl;
+    else{
+        x=stk[top];
+        top--;
     }
-    for(i=0;i<n;i++)
-    {
-        cout<<a[i]<<", ";
-    }
+    return x;
 }
 int main()
 {
-    int a[size],ch;
-    float b[size];
-    
-    cout<<"Menu"<<endl;
-    cout<<"1.Integer Array"<<endl;
-    cout<<"2.Float Array"<<endl;
-    cout<<"Enter your choice:- ";
-    cin>>ch;
-    switch(ch)
     {
-        case 1:
-              cout<<"Enter size of Array:- ";
-              cin>>n;
-              cout<<"Enter Array Element:- "<<endl;
-              for(int i=0;i<n;i++)
-              {
-                  cin>>a[i];
-              }
-              sort(a);
-              break;
-        case 2:
-              cout<<"Enter size of Array:- ";
-              cin>>n;
-              cout<<"Enter Array Element:- "<<endl;
-              for(int i=0;i<n;i++)
-              {
-                  cin>>b[i];
-              }
-              sort(b);
-              break;      
-              
+        Stack<int> s(10);
+        s.push(10);
+        s.push(23);
+        s.push(33);
     }
-    return 0;
 }
